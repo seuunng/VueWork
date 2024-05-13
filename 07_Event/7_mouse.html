@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <button type="text" @click.left="test">실행</button>
+            <!-- 클릭하면 실행됨 -->
+            <button type="text" @click.left.shift="test">실행2</button>
+            <!-- 시프트랑 클릭을 동시에 눌어야 실행됨 -->
+            <button type="text" @click.right.prevent="test">실행3</button>
+            <!-- 마우스 오른쪽 클릭해야 실행됨, 
+                마우스오른쪽을 눌르면 기본작동이 함께 작동되기 때문에 
+                프리벤트를 써서 기본동작을 막을수 있다. -->
+        </div>
+        
+    </div>
+    <script>
+        const { createApp } = Vue;
+        createApp({
+            data() {
+                return {
+                    message : "",
+                    count : 0
+                }
+            },
+            methods: {
+                    test(event){
+                        alert("실행");
+                    }
+            }
+        }).mount("#app");
+    </script>
+</body>
+
+</html> 

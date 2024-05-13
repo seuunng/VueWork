@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div @click.self="parent">
+            <!-- self: 버튼을 누르면 실행이 안됨, 정확히 div영역을 눌러야 실행됨 -->
+            <button >실행</button>
+            <button >실행</button>
+            여기를 클릭
+        </div>
+    </div>
+    <script>
+        const { createApp } = Vue;
+        createApp({
+            data() {
+                return {
+                }
+            },
+            methods: {
+                parent(){
+                    alert("div에서 발생한 이벤트");
+                    console.log("이벤트 기록: ", event)
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+
+</html>

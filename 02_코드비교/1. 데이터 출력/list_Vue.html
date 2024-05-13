@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <!--객체데이터 출력하는 예제-->
+    <div id="app">
+        <!--데이터를 출력하는 곳-->
+        <!--v-for:반복문 속성-->
+        <!--user: html에서 데이터를 담을 변수-->
+        <!--data: script에서 데이터를 담은 변수명.
+        return 값을 data에 담아서 전달했기 때문에 data라는 값을 통해서 list에 접근-->
+        <!--.list: 실제 데이터의 이름-->
+        <ul v-for="user in data.list">
+            <li>이름 = {{user.name}}</li>
+            <li>나이 = {{user.age}}</li>
+            <li>주소 = {{user.address}}</li>
+        </ul>
+    </div>
+
+    <script>
+        /*실제 데이터 입력*/
+        var data = {
+            list: [{
+                name: "user_1",
+                age: 10,
+                address: "address_1"
+            }, {
+                name: "user_2",
+                age: 20,
+                address: "address_2"
+            }, {
+                name: "user_3",
+                age: 30,
+                address: "address_3"
+            }]
+        }
+        /*데이터를 어디로 보낼지 설정*/
+        const {createApp} = Vue;
+        createApp({
+            data(){
+                return {data}
+            }
+        }).mount("#app");
+    </script>
+</body>
+</html>

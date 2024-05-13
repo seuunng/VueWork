@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        #app {
+            white-space: pre-line;
+            /* 줄바꿈을 입력한대로 적용되게 하는 속성*/
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <select v-model="msg1">
+                <option value="">선택</option>
+                <option value="철수">철수</option>
+                <option value="영희">영희</option>
+                <option value="형식">형식</option>
+            </select>
+        </div>
+        결과 : {{msg1}} <br><hr>
+        <div>
+            <select v-model="msg2">
+                <option value="">선택</option>
+                <option v-for="list in selList" :value="list">{{list}}</option>
+            </select>
+        </div>
+        결과 : {{msg2}} <br><hr>
+        <div>
+            <select v-model="msg3">
+                <option value="">선택</option>
+                <option v-for="list in selList2" :value="list.label">{{list.value}}</option>
+            </select>
+        </div>
+        결과 : {{msg3}} <br><hr>
+    </div>
+    <script>
+        const { createApp } = Vue;
+        createApp({
+            data() {
+                return {
+                    msg1: "",
+                    selList: ["철수", "영희", "승희"],
+                    msg2: "",
+                    selList2: [{value: "철수", label:"철철수입니다."},
+                    {value: "영희", label:"김영희입니다."},
+                    {value: "미자", label:"오미자입니다."},],
+                    msg3: "",
+                    
+                }
+            },
+            methods: {
+
+
+            }
+        }).mount("#app");
+    </script>
+</body>
+
+</html>

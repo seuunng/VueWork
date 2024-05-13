@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../vue.global.js"></script>
+</head>
+<body>
+    <h1>조건부렌더링2</h1>
+    <br>
+    <div id ="app" >
+        <button @click="onToggle">토글</button>
+        <div v-show="visible">보이고 숨기고</div>
+    </div>
+    <script>
+        const {createApp} = Vue;
+        createApp({
+            data(){
+                return{visible : true}
+            },
+            methods :{
+                onToggle(){
+                    this.visible = !this.visible;
+                    //! : 토글연산자
+                }
+            }
+        }).mount("#app");
+    
+    </script>
+</body>
+</html> 

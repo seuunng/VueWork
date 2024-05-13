@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../vue.global.js"></script>
+</head>
+<body>
+    <h1>단방향 바인딩</h1>
+    요소의 속성에도 바인딩 할 수 있다.<br>
+    class라는 속성의 값으로 동적데이터를 넣고 싶을때 v-bind 활용 가능<br>
+    오~ 속성값도 계속 바뀐다! 이걸 어디에 활용 할 수 있지??<br>
+    화면상의 이미지를 1초마다 바꿔주는 데에 사용할 수 있음<br> 
+    <div id ="app" >
+        <!-- <tagName v-bind: 속성명=”데이터명”/>-->
+        <div v-bind:class="'class1'+ count">
+        <!--<tagName : 속성명=”데이터명”/> -->
+        <div :class="'class1'+ count"> 
+            count={{ count }}
+        </div>
+    </div>
+    <script>
+        const {createApp} = Vue;
+        createApp({
+            data(){
+                return{count : 1}
+            },
+            methods:{
+                addCount(){
+                    setInterval(()=>{
+                        this.count++
+                    },1000);
+                }
+            },
+            created(){
+                this.addCount();
+            }
+        }).mount("#app");
+    
+    </script>
+</body>
+</html>

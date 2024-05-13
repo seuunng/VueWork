@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../vue.global.js"></script>
+</head>
+<body>
+    <h1>필터링</h1>
+    <br>
+    <div id ="app" >
+        <div>
+            search : <input type="text" v-model="name" />
+        </div>
+        <ul v-for="user in search()" > <!--반복을 돌릴때 search()함수가 실행된다.-->
+            <li>{{user}}</li>
+        </ul>
+    </div>
+
+
+    <script>
+        let data ={list:["김튜브", "홍춘식", "송라이언", "송춘봉", "홍양희"],
+            name: ""
+        }
+        const {createApp} = Vue;
+        createApp({
+            data(){
+                return data;
+            },
+            methods : {
+                search(){
+                    if(this.name.length==0) //이 조건은 this.name의 길이가 0인지 확인,  비어있는지 확인
+                        return this.list; //조건문이 참이면 모든 리스트를 출력한다.
+                        
+                    return this.list.filter((param)=>{ //조건문이 거짓이면 리스트를 필터함수 실행시켜서 해당하는 요소만 출력한다.
+                        return param.indexOf(this.name) != -1 
+                        //필터링 함수는 각 요소를 param으로 받아서, param의 문자열 내에서 this.name이 존재하는지 검사
+                        //this.name이 param 내에 존재한다면 그 위치의 인덱스를 반환하고, 존재하지 않는다면 -1을 반환
+                        //따라서, -1이 아니면 this.name을 포함하는 param을 찾는 것
+                        //중괄호가 없어도 조건문이 맞으면 첫번재 문장, 틀리면 두번재 문장이 실행된다.
+                    })
+                }
+            }
+        }).mount("#app");
+    
+    </script>
+</body>
+</html> 

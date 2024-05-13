@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../vue.global.js"></script>
+</head>
+<body>
+    <h1>반복문</h1>
+    <br>
+    <div id ="app" >
+           <div id="list1">
+                <ul>
+                    <li v-for="user in data1.list">{{user}}</li>
+                </ul>
+           </div>
+           <div id="list2">
+                <ul>
+                    <li v-for="(user, key) in data1.list">{{key}} {{user}}</li>
+                </ul>
+           </div>
+           <div id="list3">
+            <!--key값은 상징적인 숫자? 고유해야함-->
+                <ul v-for="(user, i) in data2.list" :key="i">
+                    <li >{{i}} {{user.name}}</li>
+                    <li >{{i}} {{user.age}}</li>
+                    <li >{{i}} {{user.address}}</li>
+                </ul>
+           </div>
+    </div>
+    <script>
+        let data1 ={list:["user1","user2","user3"]}
+        let data2 ={list:[
+            {name: "홍길동", age:10, address: "서울"},
+            {name: "송길동", age:30, address: "경기"},
+            {name: "박길동", age:30, address: "뉴욕"}
+        ]}
+        const {createApp} = Vue;
+        createApp({
+            data(){
+                return{data1: data1, data2: data2}
+            }
+        }).mount("#app");
+    
+    </script>
+</body>
+</html> 

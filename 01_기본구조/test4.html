@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Life Cycle</title>
+</head>
+<body>
+    <div id="app">
+        <!--Life Cycle-->
+        <h2>기본구조</h2>
+        <p id="app">
+            {{name}}, count={{count}}
+        </p>
+    </div>
+    <script>
+        const {createApp} = Vue
+
+        createApp({
+            data : function(){
+                return{name : "Hello Vue~~", count : 0}
+            },
+            setup(){
+                console.log("1. setup = ", this.name);
+            },
+            beforeCreate(){
+                console.log("2. beforeCreate = ", this.name);
+            },
+            created(){
+                console.log("3. Created = ", this.name);
+                this.test();
+            },
+            beforeMount(){
+                console.log("4. beforeMount = ", this.name);
+            },
+            mounted(){
+                console.log("5. mounted = ", this.name);
+            },
+            methods : { /*methods: 내가 만든 함수를 사용할 수 있도록 하는 속성*/
+                test : function(){
+                    setInterval(()=>{this.count++},1000);
+                    /*1초마다 count를 1씩 증가시켜라*/
+                }
+            }
+        }).mount("#app");
+        
+    </script>
+</body>
+</html>

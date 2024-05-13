@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <!--JQuery로 데이터 출력하는 것과 비교하기-->
+    <div id="app">
+        <h2>기본구조</h2>
+        {{message}}
+    </div>
+    <div id="jq">
+        <h2>JQuery로 출력한 내용</h2>
+        <p class="sub1"></p>
+    </div>
+    <script>
+        const {createApp} = Vue
+        createApp({
+            data : function(){
+                return{message : "Hello Vue😂😂"}
+            }
+        }).mount("#app");
+        
+        $(".sub1").html("Hello~ JQuery!")
+    </script>
+</body>
+</html>

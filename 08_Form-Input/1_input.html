@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        #app {
+            white-space: pre-line;
+            /* 줄바꿈을 입력한대로 적용되게 하는 속성*/
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            입력 값: <br>
+            <textarea rows="10" v-model="msg"></textarea>
+            <!-- 여러줄 입력할 수 있는 텍스트 상자 -->
+        </div>
+        <div>{{msg}}</div>
+        <hr>
+        <h2>문자로 숫자로</h2>
+        <div>
+            입력1 : <input type="text" v-model.number="result" />
+            입력2 : <input type="text" v-model.trim="result2"/><br>
+        </div>
+        <div>
+            입력1에 +10을 한 결과는 {{result + 10}}이다. <br>
+            입력2에 공백을 없앤 결과는 {{result2+"님!"}}이다. <br>
+        </div>
+    </div>
+    <script>
+        const { createApp } = Vue;
+        createApp({
+            data() {
+                return {
+                    msg: "",
+                    result:"",
+                    result2:""
+                }
+            },
+            methods: {
+
+
+            }
+        }).mount("#app");
+    </script>
+</body>
+
+</html>

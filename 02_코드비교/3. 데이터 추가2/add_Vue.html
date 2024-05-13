@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="../../vue.global.js"></script>
+    </head>
+<body>
+      <div id="app">
+            <div class="list">
+                  <ul v-for="user in list"> <!-- return data; data 자체를 리턴 했지때문에 list로 직접 접근 가능-->
+                        <li>name = {{ user.name }}</li>
+                        <li>age = {{ user.age }}</li>
+                        <li>addr = {{ user.address }}</li>
+                        
+                    </ul>
+            </div>
+
+            <div>
+                  <p>데이터 추가</p>
+                  <p>   <!--각 항목별 입력값을 newUser로 객체화 시킴-->
+                        <span>name:<input type="text" class="user-name"v-model="newUser.name"></span><br>
+                        <span>age:<input type="text" class="user-age"v-model="newUser.age"></span><br>
+                        <span>address:<input type="text" class="user-address"v-model="newUser.address"></span>
+                  <p>
+                        <button class="btn-add-user" @click="addUser"> 추가</button>
+                        <!--@click: v-on:click과 같은 의미, 클릭시 addUser함수 실행-->
+                  </p>
+            </div>
+      </div>
+
+      <script>
+            const data = {
+                  list:[{
+                        name:"user_1",
+                        age:10,
+                        address:"address_1"
+                  },{
+                        name:"user_2",
+                        age:20,
+                        address:"address_2"
+                  },{
+                        name:"user_3",
+                        age:30,
+                        address:"address_3"
+                  }],
+                  newUser: {
+                        name: "",
+                        age: 0,
+                        address: ""
+                  }
+            }
+
+            const {createApp} = Vue;
+
+            createApp({
+                  data(){
+                        /*리턴 방법1*/
+                        return{
+                        list: data.list,
+                        newUser: data.newUser
+                        };
+                        /*리턴 방법2*/
+                        return data;
+                        /*리턴 방법3*/
+                        return {data:data};
+                        /*
+                        로 반환하려면 각 동적데이터 입력 변수들마다 앞에 data.를 붙여줘야함
+                        그냥 바로 list를 값을 전달 받게 하는 것이 효율적
+                        return {data:data};은 data값을 data 라는 변수에 담아서 전달하겠다는 뜻으로
+                        return {data}; 로 써도 무방
+                        return {data2:data};이렇게 작성시 data2라는 변수에 담아서 전달하겠다는 뜻으로 
+                        동적데이터 입력 변수들앞에 data2.라고 쓰면됨
+                        */
+                  },
+                  methods : {
+                        addUser(){
+                              this.list.push({
+                                    name: this.newUser.name,
+                                    age: this.newUser.age,
+                                    address: this.newUser.address
+                              });
+                        // 데이터 추가 후 입력 필드 초기화
+                        this.newUser.name = "";
+                        this.newUser.age = "";
+                        this.newUser.address = "";
+                        }
+                  }
+            }).mount("#app");
+            
+
+      </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../../vue.global.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <ul class="list">
+            <li v-for="user in data.list"> name ={{user}}</li>
+        </ul>
+        <div>
+            <p>데이터 추가</p>
+            <p>
+                <!--v-model: html->script로 데이터 이동-->
+                <span>name:<input type="text" class="user-name" v-model="newUser"></span><br>
+                <p>
+                    <!--v-on:click : 클릭했을때 이벤트 발생-->
+                    <button class="btn-add-user" v-on:click="addUser()"> 추가</button>
+                </p>
+        </div>
+    </div>
+    <script>
+        /*데이터*/
+        /*newUser로 <span>태그와 data를 연결*/
+          var data = {
+                list:["user01", "user02", "user03"], 
+                newUser:""
+          }
+         const {createApp} = Vue;
+         createApp({
+            data(){
+                return {data: data};
+            },
+        /*객체데이터에 사용자 입력값을 추가하는 함수*/
+        /*methods: 커스텀 메서드를 만들 수 있는 속성*/
+            methods : {
+                addUser : function(){
+                    this.data.list.push(this.newUser);
+                }
+            }
+        }).mount("#app"); 
+    </script>
+</body>
+</html>

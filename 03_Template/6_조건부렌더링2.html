@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../vue.global.js"></script>
+</head>
+<body>
+    <h1>조건부렌더링</h1>
+    <br>
+    <div id ="app" >
+        <button @click="onToggle">토글</button>
+        <!--v-if: 로 설정하니깐 이 태그자체가 없어졌다 생겼다함-->
+        <!--v-show: 는 태그는 그대로 있고 display=none으로 바뀜-->
+        <template v-if="visible">
+        <!--template: th:block처럼 묶어주는 태그-->
+            <div>보이고1</div>
+            <div>보이고2</div>
+            <div>보이고3</div>
+        </template>
+        <template v-else>
+            <div>숨기고1</div>
+            <div>숨기고2</div>
+            <div>숨기고2</div>
+        </template>
+    </div>
+    <script>
+        const {createApp} = Vue;
+        createApp({
+            data(){
+                return{visible : true}
+            },
+            methods :{
+                onToggle(){
+                    this.visible = !this.visible;
+                }
+            }
+        }).mount("#app");
+    
+    </script>
+</body>
+</html> 

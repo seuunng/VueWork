@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!--Vue객체를 생성하는 두가지 방법-->
+        <h2>기본구조</h2>
+        <!--Vue에서 처리한 결과를 보여줄 위치-->
+        {{message}}
+    </div>
+    <script>
+        /*1. Vue라는 객체생성하기: createApp()
+            mount() :  Html데이터 뿌릴 곳 지정
+            이렇게 사용하는 경우 mount()는 한번만 사용가능*/
+        
+        Vue.createApp({
+            data : function(){
+                return{message : "Hello Vue~~"}
+            }
+        }).mount("#app");
+        
+        /* 변수에 담기: 
+        createApp을 함수로 바로 호출하기 전에 변수에 담아서 
+        Vue를 생략하고 쓰는 방식
+        이렇게 사용하는 경우 여러 곳에 mount()를 여러곳에 사용가능 */
+        const {createApp} = Vue
+
+        createApp({
+            data : function(){
+                return{message : "Hello Vue~~2"}
+            }
+        }).mount("#app");
+        
+    </script>
+</body>
+</html>

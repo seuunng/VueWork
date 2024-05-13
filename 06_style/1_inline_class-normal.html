@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        .mystyle1{
+            border:4px solid red; 
+        }
+        .mystyle2{
+            font-size:20px; 
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <button @click="ontoggle">토글</button>
+            <!-- <div class="mystyle1 mystyle2">CSS 테스트입니다.</div> -->
+            <!-- 스타일을 동적으로 적용하고 싶을때 -->
+            <div v-bind:class="{mystyle1:onmystyle1, mystyle2:onmystyle2}">CSS 테스트입니다.</div>
+        </div>
+    </div>
+    <script>
+        const {createApp} =Vue;
+        createApp({
+            data(){ // Vue 3에서 data 함수는 객체를 반환해야 함,  return
+                return {
+                onmystyle1: true, //여기는 :이랑,을 써야함 자꾸 =랑;을 써서 틀림
+                onmystyle2: true,
+                }
+            },
+            methods :{
+                ontoggle(){ //this를 붙여줘야함
+                    this.onmystyle1 = !this.onmystyle1;
+                    this.onmystyle2 = !this.onmystyle2;
+                }
+            }
+        }).mount("#app"); //아이디를 app로 가진 곳에 적용(아이디는 #, 클래스는 .) 
+    </script>
+</body>
+</html>

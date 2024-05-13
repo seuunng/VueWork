@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <a href="https://m.naver.com/" @click="addMessage">prevent 사용 X</a><br>
+        <a href="https://m.naver.com/" @click.prevent="addMessage">prevent 사용 O</a><br>
+        <!-- 하이퍼링크의 기본기능을 막음, 함수는 실행되지만 페이지이동이 안됨 -->
+    </div>
+    <script>
+        const { createApp } = Vue;
+        createApp({
+            data() {
+                return {
+
+                }
+            },
+            methods: {
+                addMessage(){
+                    alert("실행됨");
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+
+</html>

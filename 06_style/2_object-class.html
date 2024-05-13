@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        .mystyle1{
+            border:4px solid red; 
+        }
+        .mystyle2{
+            font-size:20px; 
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <button @click="onBorder">border토글</button>
+            <button @click="onFont">font토글</button>
+            <!-- <div v-bind:class="{mystyle1:onmystyle1, mystyle2:onmystyle2}">CSS 테스트입니다.</div> -->
+            <div v-bind:class="classObject">CSS 테스트입니다.</div>
+            <!-- 변수를 객체화해서 사용하면 위 주석처럼 따로따로 속성값을 쓰지 않아도 된다.
+            그리고 객체를 속상값을 쓸땐 {}를 안써도 된다. -->
+        </div>
+    </div>
+    <script>
+        const {createApp} =Vue;
+        createApp({
+            data(){ 
+                return {
+                    classObject : {
+                        mystyle1: true, 
+                        mystyle2: true,
+                    }
+                }
+            },
+            methods :{
+                onBorder(){ 
+                    this.classObject.mystyle1 = !this.classObject.mystyle1;
+                },
+                onFont(){
+                    this.classObject.mystyle2 = !this.classObject.mystyle2;
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+</html>

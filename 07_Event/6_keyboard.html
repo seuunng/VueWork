@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <input type="text" @keydown="onKeyDown1">일반키보드다운<br>
+            <!-- 모든 키 입력시 동작, 영문키만 가능 -->
+            <input type="text" @keydown.enter="onKeyDown_enter">엔터키 입력<br>
+            <!-- 엔트키 눌를때 동작 -->
+            <input type="text" @keydown.control.delete="onKeyDown_ctrl_del">컨트롤과 델리트 입력<br>
+            <!-- 컨트롤 따로 델리트 따로 눌러도 동작 -->
+            <input type="text" @keydown.ctrl.delete="onKeyDown_ctrl_del">컨트롤+델리트 입력<br>
+            <!-- ctrl버튼과 del버튼은 동시에 눌러야 실행됨 -->
+        </div>
+        <div v-html="message"></div>
+        
+    </div>
+    <script>
+        const { createApp } = Vue;
+        createApp({
+            data() {
+                return {
+                    message : "",
+                    count : 0
+                }
+            },
+            methods: {
+                    onKeyDown1(event){
+                        this.count++;
+                        this.message += this.count + "=" + event.key +"<br>";
+                    },
+                    onKeyDown_enter(){
+                        this.message += "enter 입력<br>";
+                    },
+                    onKeyDown_ctrl_del(){
+                        this.message += "ctrl과 del 입력<br>";
+                    }
+            }
+        }).mount("#app");
+    </script>
+</body>
+
+</html> 

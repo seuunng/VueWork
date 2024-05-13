@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../vue.global.js"></script>
+</head>
+<body>
+    <h1>심플 메모장</h1>
+    <div id="app">
+        <div>
+            메모입력 : <input type="text" v-model="newMemo" v-on:keydown.enter="addMemo"/> 
+            <!--v-on:keydown.enter: 텍스트 박스에서 엔터키누를때 addMemo함수가 실행되게 함-->
+            <button @click="addMemo" v-if="!isUpdate">추가</button>
+            <button @click="updateMemo(editIndex)" v-else>수정</button>
+            <button @click="reset">취소</button>
+        </div>  
+        <div>
+            <ul v-for="(memo, index) in list">
+                <li >메모{{index+1}} : {{memo}} &nbsp;
+                    <button @click="deleteMemo(memo)">삭제 </button> 
+                    <button @click="showMemo(index)">수정</button></li> 
+            </ul>
+        </div>
+    </div>
+    <script>
+        //일관성 유지나 오타방지를 위해 객체를 생성해서 불러와서 쓸 수 있도록 한다.
+        const EDIT_MODE = {
+            UPDATE : "update",
+            ADD : "add"
+        }
+        let data ={list:["memo1", "memo2", "memo3"],
+                    newMemo : "",
+                    isUpdate :false, 
+                    editIndex: null,
+                    state: EDIT_MODE.ADD //이런식으로
+        };          //주고받는 매개변수들은 다 여기에 정의되어야 함
+        const {createApp} = Vue;
+        createApp({
+            data(){
+                return data;
+            },
+            methods :{
+                addMemo(){
+                    if(this.newMemo.length == 0){ //입력필드에 입력된 내용이 없으면 아래내용 실행
+                    alert("메모를 입력하세요");
+                    return;
+                    }
+                    this.list.push(this.newMemo); //push(): 리스트요소를 추가
+                    this.newMemo=""; // 걍 v-model을 이용해서 newMemo값을 ""처리하는 것으로 필드 초기화 시킴
+                },
+                showMemo(index){
+                    this.newMemo=this.list[index]; 
+                    //필드에 받아온 인덱스기준으로 해당 텍스트를 입력되게 함
+                    this.isUpdate=true;
+                    //수정상태로 설정
+                    this.editIndex=index; 
+                    //받아온 인덱스를 editIndex로 다음 함수에 전달
+                },
+                updateMemo(index){ //showMemo로 부터 넘어온 값을 index로 받음
+                    this.list[index] = this.newMemo; //해당인덱스를 newMemo값으로 변경
+                    this.newMemo = ""; // 수정 후에 입력 필드를 초기화합니다.
+                    this.isUpdate = false; // 수정 모드를 종료합니다.
+                    this.editIndex = null; // editIndex값을 초기화시킴
+                },
+                deleteMemo(targetMemo){ //걍 index를 받으면 되는데 굳이...ㅋㅋㅋ
+                    console.log(targetMemo);
+                    let idx = this.list.findIndex((memo)=>{ 
+                        return memo==targetMemo //findIndex()함수로 들어간 파라미터 memo가 
+                    }); //리스트 몇번째있는 요소와 일치하는지 확인하여 idx에 인덱스넘버를 저장
+                    //예외처리
+                    if(idx!=-1){
+                        this.list.splice(idx, 1);
+                        //splice(삭제할 인데스, 몇 개 삭제할지)
+                    }
+                },
+                reset(){ 
+                    this.newMemo = ""; 
+                    this.isUpdate = false;
+                    this.editIndex = null;
+                }
+            }
+        }).mount("#app");
+    </script>
+
+    
+</body>
+</html>

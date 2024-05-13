@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../vue.global.js"></script>
+</head>
+<body>
+    <h1>조건문</h1>
+    <br>
+    <div id ="app" >
+            <div>
+                점수입력 : <input type="text" v-model="jumsu"/>
+            </div>
+                <div v-if="jumsu=='a'">A학점입니다.</div>
+                <div v-else-if="jumsu=='b'">B학점입니다.</div>
+                <div v-else-if="jumsu=='c'">C학점입니다.</div>
+                <div v-else-if="jumsu=='d'">D학점입니다.</div>
+                <div v-else>F학점입니다.</div>
+            
+        </div>
+    </div>
+    <script>
+        const {createApp} = Vue;
+        createApp({
+            data(){
+                //양방향을 데이터를 받기위한 변수 설정
+                return{jumsu: ""}
+            }
+        }).mount("#app");
+    
+    </script>
+</body>
+</html> 

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button v-on:click="addCount($event)">실행1</button>
+         <!-- 이벤트 관련 정보들을 확인할수있다. 뭔가 일반적인 변수의 역할이 아니라
+         원래도 생성되는 정보를 필요하면 볼 수 있도록 전달하는 역할
+         전달하는 역할의 예시: 마우스의위치, 등 -->
+        <button @click="count += 2">실행2</button>
+        <!-- 간단한 내용의 경우 그냥 여기에 써줘도 됨 -->
+            count ={{count}}
+        </div>
+    </div>
+    <script>
+        const {createApp} = Vue;
+        createApp({
+            data(){
+                return{
+                    count: 1
+                }
+            },
+            methods:{
+                addCount(){
+                    this.count++;
+                    console.log("이벤트 정보: "+ event)
+                    // , 로 해줘야 다양한 정보가 나옴
+                    // , 의 경우 console.log()에 두 개의 인자를 전달
+                    // + 로 event를 출력하면 어떤 종류의  이벤트인지 만 간단하게 나옴 
+                    // + 의 경우 event 객체를 문자열로 변환하려고 시도
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        #app {
+            white-space: pre-line;
+            /* 줄바꿈을 입력한대로 적용되게 하는 속성*/
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            입력 값(true, false) : <input type="checkbox" v-model="msg1"/><br>
+            결과 : {{msg1}}
+        </div>
+        <hr><br>
+        <div>
+            입력 값(참, 거짓) : <input type="checkbox" v-model="msg2" true-value="바보" false-value="멍청이"/><br>
+            <!-- true-value, false-value: 참과 거짓의 값을 지정할 수 있는 속성, 기본값은 true, false -->
+            결과 : {{msg2}}
+        </div>
+        <hr><br>
+        <div>
+            <label><input type="checkbox" value="철수" v-model="msg3" />철수</label><br>
+            <label><input type="checkbox" value="연희" v-model="msg3" />연희</label><br>
+            <label><input type="checkbox" value="영수" v-model="msg3" />영수</label><br>
+            <!-- <label>은 체크박스와 밸류까지 모두 선택지점으로 만든다 -->
+            결과 : {{msg3}}
+        </div>
+        <hr><br>
+        <div>
+            <label><input type="radio" value="철수" v-model="msg4" />철수</label><br>
+            <label><input type="radio" value="연희" v-model="msg4" />연희</label><br>
+            <label><input type="radio" value="영수" v-model="msg4" />영수</label><br>
+            결과 : {{msg4}}
+        </div>
+        <hr><br>
+        <div>
+            <div v-for="member in memberList">
+                <label><input type="radio" v-bind:value="member" v-model="msg5" />{{member}}</label><br>
+                <!-- :value : :value를 사용하여, 해당 데이터의 현재 값이나 상태에 따라 
+                    input 요소의 value 속성을 동적으로 업데이트할 수 있습니다.-->
+            </div>
+            결과 : {{msg5}}
+        </div>
+    </div>
+    <script>
+        const { createApp } = Vue;
+        createApp({
+            data() {
+                return {
+                    msg1:"",
+                    //체크박스 경우 불린 값을 true로 설정하면 기본으로 체그상태고 되고
+                    //false로 설정하면 체크해제 상태로 된다.
+                    //""로 설정해도 체크 해제 상태로 된다.
+                    msg2: "",
+                    msg3: ['영수'], //값을 리턴하는 형식을 배열로 지정
+                    msg4: "영수",
+                    memberList: ['춘봉', '양봉', '춘식', '철분'],
+                    msg5: "",
+                }
+            },
+            methods: {
+
+
+            }
+        }).mount("#app");
+    </script>
+</body>
+
+</html>
