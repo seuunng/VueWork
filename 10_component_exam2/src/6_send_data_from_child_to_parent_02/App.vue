@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <my-button @logChild="log">MyButton</my-button>
+    <my-button @logChild="log" @changeMessage="changeMessage">MyButton</my-button>
     <!-- 실제로는 div이고 mybutton자식컴포넌트기 때문에 
       클릭이벤트리스너를 달아도 실행이 안되야 하는거 아닌가?
       라는 의문이 들어야 하지만,
@@ -20,17 +20,16 @@ export default {
     MyButton 
    },
   name:'App',
-  data(){
-    return{
-    }
-  },
   methods:{
-    log(message){
+    log(logChild){ //자식컴포넌트에서 $emit 으로 넘긴값 받기
       alert("함수실행!");
+      console.log(logChild);
+    },
+    changeMessage(msg){ //자식컴포넌트에서 $emit 으로 넘긴값 받기
+      console.log(msg);
     }
-    }
+  }
 }
-
 </script>
 
 <style>
@@ -40,9 +39,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
-}
-.mycss {
-  background-color: red;
-}
-</style>
+  margin-top: 60px; }
+.mycss {  background-color: red;  }</style>
