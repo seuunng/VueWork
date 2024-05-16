@@ -1,13 +1,11 @@
 <template>
   <div id="app">
     <div>
-      <h1>컴퍼넌트 라이프 사이클 테스트</h1>
+      <h1>부모에서 자식으로 데이터 보내기</h1>
     </div>
     <div>
-        <button @click="sw=true">컴펀넌트 mount</button>
-        <button @click="sw=false">컴펀넌트 unmount</button>
     </div>  
-    <parent-component v-if="sw"></parent-component>
+    <parent-component></parent-component>
   </div>
 </template>
 
@@ -16,11 +14,6 @@ import parentComponent from './component/parentComponent.vue'
 export default {
   components: { parentComponent },
   name:'App',
-  data(){
-    return{
-      sw:true,
-    }
-  }
 }
 </script>
 
